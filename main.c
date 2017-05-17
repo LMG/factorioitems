@@ -17,9 +17,12 @@ typedef struct Item {
 
 int main(int argc, char* argv[])
 {
+  //Definitions: we only consider those items that can't be provided by the bus
+  //Red science
   Item gearwheel = { .cpnts = {NULL}, .tps = 0.5, .nbOut = 1};
   Cpnt redScienceCpnt1 = (Cpnt) {.item = &gearwheel, .nb = 1};
   Item redScience = { .cpnts = {&redScienceCpnt1}, .tps = 5, .nbOut = 1};
+  //Green science
   Cpnt yellowArmCpnt1 = (Cpnt) {.item = &gearwheel, .nb = 1};
   Item yellowArm = { .cpnts = {&yellowArmCpnt1}, .tps = 0.5, .nbOut = 1};
   Cpnt transportBeltCpnt1 = (Cpnt) {.item = &gearwheel, .nb = 1};
@@ -34,6 +37,20 @@ int main(int argc, char* argv[])
   printf("On a besoin de %f usines rouges pour consommer la totalité d'1 usine de gear wheels\n", 
           (redScience.cpnts[0]->item->nbOut / redScience.cpnts[0]->item->tps)/
           (redScience.cpnts[0]->nb / redScience.tps));
+  printf("On produit %.2f science verte par seconde avec 1 usine\n", greenScience.nbOut / greenScience.tps);
+  printf("On consomme %.2f gear wheels par seconde avec 1 usine de science verte\n", 
+        ( greenScience.cpnts[0]->nb *
+            (greenScience.cpnts[0]->item->cpnts[0]->nb / greenScience.cpnts[1]->item->tps)
+          + greenScience.cpnts[1]->nb * 
+            (greenScience.cpnts[1]->item->cpnts[0]->nb / greenScience.cpnts[1]->item->tps) )
+        / greenScience.tps);
+  printf("On a besoin de %f usines rouges pour consommer la totalité d'1 usine de gear wheels\n", 
+        ( greenScience.cpnts[0]->item->cpnts[0]->item->nbOut / greenScience.cpnts[0]->item->cpnts[0]->item->tps ) /
+        ( ( greenScience.cpnts[0]->nb *
+              (greenScience.cpnts[0]->item->cpnts[0]->nb / greenScience.cpnts[1]->item->tps)
+            + greenScience.cpnts[1]->nb * 
+              (greenScience.cpnts[1]->item->cpnts[0]->nb / greenScience.cpnts[1]->item->tps) )
+          / greenScience.tps ) );
 
   return EXIT_SUCCESS;
 }
