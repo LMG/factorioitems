@@ -22,6 +22,11 @@ int main(int argc, char* argv[])
   Item redScience = { .cpnts = {&redScienceCpnt1}, .tps = 5, .nbOut = 1};
   Cpnt yellowArmCpnt1 = (Cpnt) {.item = &gearwheel, .nb = 1};
   Item yellowArm = { .cpnts = {&yellowArmCpnt1}, .tps = 0.5, .nbOut = 1};
+  Cpnt transportBeltCpnt1 = (Cpnt) {.item = &gearwheel, .nb = 1};
+  Item transportBelt = { .cpnts = {&transportBeltCpnt1}, .tps = 0.5, .nbOut = 2};
+  Cpnt greenScienceCpnt1 = (Cpnt) {.item = &yellowArm, .nb = 1};
+  Cpnt greenScienceCpnt2 = (Cpnt) {.item = &transportBelt, .nb = 1};
+  Item greenScience = { .cpnts = {&greenScienceCpnt1, &greenScienceCpnt2}, .tps = 6, .nbOut = 1};
 
   printf("On produit %.2f science rouge par seconde avec 1 usine\n", redScience.nbOut / redScience.tps);
   printf("On produit %.2f gear wheels par seconde avec 1 usine\n", gearwheel.nbOut / gearwheel.tps);
