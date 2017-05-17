@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
           + greenScience.cpnts[1]->nb * 
             (greenScience.cpnts[1]->item->cpnts[0]->nb / greenScience.cpnts[1]->item->tps) )
         / greenScience.tps);
-  printf("On a besoin de %f usines rouges pour consommer la totalité d'1 usine de gear wheels\n", 
+  printf("On a besoin de %f usines verte pour consommer la totalité d'1 usine de gear wheels\n", 
         ( greenScience.cpnts[0]->item->cpnts[0]->item->nbOut / greenScience.cpnts[0]->item->cpnts[0]->item->tps ) /
         ( ( greenScience.cpnts[0]->nb *
               (greenScience.cpnts[0]->item->cpnts[0]->nb / greenScience.cpnts[1]->item->tps)
